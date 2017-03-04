@@ -90,7 +90,7 @@ The third readers-writers problem depends on serving readers/writers in order of
 
 
 
-4. Is the swap() function below thread-safe or not? Explain your reasoning.
+4.Is the swap() function below thread-safe or not? Explain your reasoning.
 
 ```
 int temp;
@@ -111,11 +111,13 @@ void swap(int *y, int *z)
 This code isn't thread safe because swap changes the value of the global variable temp. This causes an insonsistency between 
 threads accessing the same variable.
 
-5. Suppose you are asked to design a server application consisting of two processes P1 and P2, such that (1) P2 is to sleep until woken up by P1, whereupon (2) P2 would take a 10 MB file from P1 and compress it. What forms of IPC would be best suited to implement these types of information sharing? Describe your solution.
+5.Suppose you are asked to design a server application consisting of two processes P1 and P2, such that (1) P2 is to sleep until woken up by P1, whereupon (2) P2 would take a 10 MB file from P1 and compress it. What forms of IPC would be best suited to implement these types of information sharing? Describe your solution.
 
 A pipe could work for this problem. P2 would sleep until data is finished being written to the buffer. Then P1 sends P2 a signal to wake up and p2 would start to compress the file. Shared memory is also possible to be used, but I don't think it's scalable.
 
-6. Suppose processes P0 and P1 share variable V1, and processes P1 and P2 share variable V2, while processes P0, P1 and P2 share V3.  Operations on V1 are limited to increment() and decrement().  Operations on V2 are limited to square() and squareroot().  Operations on V3 are limited to sin() and cos().  Design a monitor-based solution that synchronizes access to and manipulation of these variables between the three processes so that race conditions are eliminated.
+6.Suppose processes P0 and P1 share variable V1, and processes P1 and P2 share variable V2, while processes P0, P1 and P2 share V3.  Operations on V1 are limited to increment() and decrement().  Operations on V2 are limited to square() and squareroot().  Operations on V3 are limited to sin() and cos().  Design a monitor-based solution that synchronizes access to and manipulation of these variables between the three processes so that race conditions are eliminated.
+
+```
 
 moitor Monitor {
   condition p1, p2, p3; //condition of the processes P1 P2....
@@ -157,7 +159,7 @@ moitor Monitor {
   p3.signal()
   }
  }
-
+```
 
 
 
