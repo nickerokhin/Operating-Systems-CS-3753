@@ -29,7 +29,8 @@ going_west(){
     if(!west){
     v(bridge)
     }
-    v(west);
+    v(west_s);
+    v(east_s)
 }
 
 
@@ -45,9 +46,9 @@ going_east(){
     east--;
     v(bridge)
   }
-  v(east)
+  v(east_s)
+  v(west_s)
 }
-
 
 
 ```
