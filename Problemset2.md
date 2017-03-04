@@ -113,4 +113,51 @@ threads accessing the same variable.
 
 5. Suppose you are asked to design a server application consisting of two processes P1 and P2, such that (1) P2 is to sleep until woken up by P1, whereupon (2) P2 would take a 10 MB file from P1 and compress it. What forms of IPC would be best suited to implement these types of information sharing? Describe your solution.
 
+A pipe could work for this problem. P2 would sleep until data is finished being written to the buffer. Then P1 sends P2 a signal to wake up and p2 would start to compress the file. Shared memory is also possible to be used, but I don't think it's scalable.
+
+6. Suppose processes P0 and P1 share variable V1, and processes P1 and P2 share variable V2, while processes P0, P1 and P2 share V3.  Operations on V1 are limited to increment() and decrement().  Operations on V2 are limited to square() and squareroot().  Operations on V3 are limited to sin() and cos().  Design a monitor-based solution that synchronizes access to and manipulation of these variables between the three processes so that race conditions are eliminated.
+
+moitor Monitor {
+  condition p1, p2, p3; //condition of the processes P1 P2....
+  int v1, v2, v3
+
+
+  increment(v1){
+  p1.wait() //Wait for p1 to finish being used
+  v1+=1
+  p1.signal() //Signal p1 is ready for use
+  }
+  
+  decrement(v1){
+  p1.wait()
+  v1-=1
+  p1.signal()
+  }
+  
+  square(v2){
+  p2.wait()
+  v2*=v2
+  p2.signal()
+  }
+  
+  squareRoot(v2)
+  p2.wait()
+  v2 = sqrt(v2)
+  p2.signal()
+  
+  sin(v3){
+  p3.wait()
+  v3 = sin(v3)
+  p3.signal()
+  }
+  
+  cos(v3){
+  p3.wait()
+  v3 = sin(v3)
+  p3.signal()
+  }
+ }
+
+
+
 
