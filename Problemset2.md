@@ -146,22 +146,22 @@ moitor Monitor {
   
   squareRoot(v2)
   p2.wait()
-  v2 = sqrt(v2)
+  v2.sqrt()
   p2.signal()
   
   sin(v3){
   p3.wait()
-  v3 = sin(v3)
+  v3.sin()
   p3.signal()
   }
   
   cos(v3){
   p3.wait()
-  v3 = sin(v3)
+  v3.cos()
   p3.signal()
   }
  }
 ```
 
-
+Thank you https://en.wikipedia.org/wiki/Monitor_(synchronization) for monitor help
 
